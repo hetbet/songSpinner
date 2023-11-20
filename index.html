@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Spin Please.</title>
+
+<style>
+/* Head + Body */
+head, body {
+    margin: 0;
+    text-align: center;
+    font-family: 'Lucida Sans';
+    overflow: hidden;
+}
+
+/* Content */
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Record Player Box */
+#recordPlayerBox {
+    margin: 5vh 0vw 5vh 0vw;
+}
+
+/* Record Player */
+#recordPlayer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50vw;
+    height: auto;
+}
+
+/* Headings */
+h1 {
+    font-size: 4vw;
+}
+
+h2 {
+    font-size: 3vw;
+}
+
+h3 {
+    font-size: 2.5vw;
+    color: blue;
+}
+</style>
+</head>
+<body>
+<!-- Audio -->
+<audio id="track" src="secret.mp3"></audio>
+<!-- Content of the page! -->
+<div id="content">
+    <h1>SurvGame</h1>
+    <h2>404 - Page not found</h2>
+
+    <a href="https://surv.wintrcat.uk/dash"><h3>Back Home</h3></a>
+
+    <div id="recordPlayerBox">
+        <img id="recordPlayer" src="asset.png" onclick="spin()">
+    </div>
+</div>
+<!-- Script -->
+<script>
+let recordPlayer = null;
+let rotation = 0;
+
+let track = document.querySelector("#track");
+
+function spin() {
+    if (!recordPlayer) {
+        track.play();
+        recordPlayer = setInterval(() => {
+            document.querySelector("#recordPlayer").style.transform = "rotate("+rotation+"deg)";
+            rotation = (rotation + 1) % 360;
+        }, 10);
+    } else {
+        recordPlayer = clearInterval(recordPlayer);
+        track.pause();
+    }
+}
+</script>
+</body>
+</html>
